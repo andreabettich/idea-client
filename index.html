@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IDEA Board</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css">
+</head>
+
+<body>
+
+    <!-- navigation bar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i> IDEA Board</a>
+        </div>
+    </nav>
+
+    <!-- main body of our application -->
+    <div class="container" id="ideas">
+        <!-- add an event form -->
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Add an Idea</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Title" v-on:input="createSlug" v-model="idea.title">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="" disabled="disabled" v-model="idea.slug">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Description" v-model="idea.description"></textarea>
+                        </div>
+                        <button class="btn btn-primary" v-on:click="addIdea">Submit</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- show the events -->
+        <div class="col-sm-6">
+            <div class="list-group">
+                <div href="#" class="list-group-item" v-for="(idea, index) in ideas">
+                    <h4 class="list-group-item-heading">
+                  <i class="glyphicon glyphicon-bullhorn"></i>
+                  {{ idea.title }} ({{ idea.slug }})
+                </h4>
+
+                    <h5>
+                  <i class="glyphicon glyphicon-arrow-up"></i> {{ idea.meta.upvotes }} |
+                  <i class="glyphicon glyphicon-arrow-down"></i> {{ idea.meta.downvotes }}
+
+                </h5>
+
+                    <p class="list-group-item-text" v-if="idea.description">{{ idea.description }}</p>
+
+                    <button class="btn btn-xs btn-success" v-on:click="upvoteIdea(index)">
+                      <i class="glyphicon glyphicon-arrow-up"></i> Upvote
+                    </button>
+                    <button class="btn btn-xs btn-danger" v-on:click="downvoteIdea(index)">
+                      <i class="glyphicon glyphicon-arrow-down"></i> Downvote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- JS -->
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
