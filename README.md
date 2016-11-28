@@ -1,4 +1,4 @@
-# idea-client
+# Idea Board Client
 
 Start with
 ```shell
